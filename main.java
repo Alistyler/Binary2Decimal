@@ -2,12 +2,13 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-class input extends JFrame implements ActionListener {
+class Input extends JFrame implements ActionListener {
     static JTextField text;
+    static JTextArea output;
     static JFrame frame;
     static JButton button;
     static JLabel label;
-    input()
+    Input()
     {
     }
 
@@ -16,11 +17,13 @@ class input extends JFrame implements ActionListener {
         label = new JLabel("nothing entered");
         button =new JButton("convert");
 
-        input input = new input();
+        Input input = new Input();
 
         button.addActionListener(input);
 
         text  = new JTextField("Enter up to 8 binary digits", 16);
+
+        output = new JTextArea("Result:");
 
         JPanel panel = new JPanel();
 
@@ -32,10 +35,20 @@ class input extends JFrame implements ActionListener {
         panel.add(text);
         panel.add(label);
         panel.add(button);
+        panel.add(output);
+
+        panel.setLayout(new BorderLayout());
+        int width = 1000;
+        int height = 500;
+        text.setBounds(width/2 -100, 50, 200, 30);
+        label.setBounds(width/2 - 100, 100, 500, 30);
+        button.setBounds(width/2 + 100, 50, 100, 30);
+        output.setBounds(50, 250, width - 100, 30);
+        
 
         frame.add(panel);
 
-        frame.setSize(1000, 1000);
+        frame.setSize(width, height);
 
         frame.setVisible(true);
     }
@@ -47,6 +60,7 @@ class input extends JFrame implements ActionListener {
                 if (matches()) {
                     label.setText(text.getText());
                     bin2dec();
+
                 } else {
                     label.setText("Error: Do not enter anything other than 0 or 1!");
                 }
@@ -85,6 +99,7 @@ class input extends JFrame implements ActionListener {
 
     public int bin2dec() {
         String charString = text.getText();
+        String steps = "";
         int len = charString.length();
         int decimal = 0;
         
@@ -93,11 +108,13 @@ class input extends JFrame implements ActionListener {
             int binaryDigit = Character.getNumericValue(binaryChar);
             int dec = binaryDigit * (int) Math.pow(2,  (len - 1) - i);
             decimal += dec;
+            steps += binaryDigit + " * 2^{" + ((len - 1) - i) + "} + "; //from Microsoft Copilot
         }
-
-        System.out.println(decimal + " = " + charString);
-        System.out.println(len);
-
+    
+        steps = steps.substring(0, steps.length() - 3); //from Microsoft Copilot
+        output.setText(charString + " = " + steps + " = " + decimal);
+    
         return decimal;
     }
+    
 }
