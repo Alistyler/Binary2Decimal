@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.awt.*;
 import javax.swing.*;
 
 class input extends JFrame implements ActionListener {
@@ -22,6 +23,11 @@ class input extends JFrame implements ActionListener {
         text  = new JTextField("Enter up to 8 binary digits", 16);
 
         JPanel panel = new JPanel();
+
+        Font font = new Font("Monospace", Font.ITALIC, 14);
+
+        text.setFont(font);
+        label.setFont(font);
 
         panel.add(text);
         panel.add(label);
