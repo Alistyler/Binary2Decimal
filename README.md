@@ -1,8 +1,6 @@
 # Binary2Decimal
-Converts binary number into decimal form
-
 This Java project is a project idea with the purpose to improve my coding skills.
-It converts every binary number into decimal form as long asyou enter up to 8 binary digits.
+It converts binary number with a maximum of 8 digits into decimal form.
 
 ## HOW TO USE IT
   1. Download this repository
